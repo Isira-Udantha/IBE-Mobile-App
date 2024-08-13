@@ -35,7 +35,7 @@ public class FlightServiceIMPL implements FlightService {
     public List<FlightDTO> searchFlights(LocalDate departureDate, String arrival, String departure) {
         List<Flight> flights = flightRepo.findAllByDepartureDateEqualsAndArrivalAirportEqualsAndDepartureAirportEquals(departureDate,arrival,departure);
         if (!flights.isEmpty()){
-            List<FlightDTO> flightDTOS = modelMapper.map(flights, new TypeToken<FlightDTO>(){}.getType());
+            List<FlightDTO> flightDTOS = modelMapper.map(flights, new TypeToken<List<FlightDTO>>(){}.getType());
             return flightDTOS;
         }else {
             throw new RuntimeException("No flights are found");
