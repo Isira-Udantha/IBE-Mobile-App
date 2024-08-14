@@ -15,13 +15,25 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @PostMapping(value = "/save")
+    @PostMapping(value = "/register")
     public ResponseEntity<StandardResponse> saveUser(@RequestBody UserDTO userDTO){
-        System.out.println(userDTO);
+//        System.out.println(userDTO);
         String id = userService.addUser(userDTO);
         return new ResponseEntity<StandardResponse>(
                 new StandardResponse(201,"user added successfully",id),
                 HttpStatus.CREATED
+        );
+    }
+
+    @GetMapping(
+            value = "/search-user",
+            params = "id"
+            )
+    public ResponseEntity<StandardResponse> searchUserById(@RequestParam(value = "id") int userid){
+        UserDTO userDTO = userService.getUserById(userid);
+        return new ResponseEntity<StandardResponse>(
+                new StandardResponse(200,"Success",userDTO),
+                HttpStatus.OK
         );
     }
 

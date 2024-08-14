@@ -25,4 +25,15 @@ public class UserServiceIMPL implements UserService {
         }
 
     }
+
+    @Override
+    public UserDTO getUserById(int userid) {
+        User user = userRepo.getReferenceById(userid);
+        if (userRepo.existsById(user.getUserId())) {
+            UserDTO userDTO = modelMapper.map(user, UserDTO.class);
+            return userDTO;
+        }else {
+            throw new RuntimeException("No customer from that id");
+        }
+    }
 }
