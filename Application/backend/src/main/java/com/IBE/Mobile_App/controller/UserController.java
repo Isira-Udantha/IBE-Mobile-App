@@ -40,7 +40,7 @@ public class UserController {
             String hashPassword = passwordEncoder.encode(user.getUserPassword());
             user.setUserPassword(hashPassword);
             User savedUser = userRepo.save(user);
-            if (savedUser.getUserId()>0){
+            if (savedUser.getUserNumber()>0){
                 return new ResponseEntity<StandardResponse>(
                 new StandardResponse(201,"user added successfully",savedUser.getUserName()),
                 HttpStatus.CREATED);
@@ -58,10 +58,10 @@ public class UserController {
 
     @GetMapping(
             value = "/search-user",
-            params = "id"
+            params = "username"
             )
-    public ResponseEntity<StandardResponse> searchUserById(@RequestParam(value = "id") int userid){
-        UserDTO userDTO = userService.getUserById(userid);
+    public ResponseEntity<StandardResponse> searchUserById(@RequestParam(value = "username") String username){
+        UserDTO userDTO = userService.getUserById(username);
         return new ResponseEntity<StandardResponse>(
                 new StandardResponse(200,"Success",userDTO),
                 HttpStatus.OK

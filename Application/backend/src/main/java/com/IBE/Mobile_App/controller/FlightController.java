@@ -28,7 +28,7 @@ public class FlightController {
         );
     }
 
-    @GetMapping(value = "search-flight-by-date-arrival-and-departure",
+    @GetMapping(value = "/search-flight-by-date-arrival-and-departure",
             params = {"departure_date", "arrival", "departure"}
     )
     public ResponseEntity<StandardResponse> searchFlights(@RequestParam(value = "departure_date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate departure_date,

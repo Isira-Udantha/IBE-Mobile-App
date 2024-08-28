@@ -12,6 +12,8 @@ import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Set;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
@@ -23,13 +25,14 @@ import java.util.Date;
 })
 
 public class User {
-    @Id
-    @Column(name = "user_id",length = 45)
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private int userId;
 
+    @Id
     @Column(name = "user_name",length = 100,nullable = false)
     private String userName;
+
+    @Column(name = "user_id",length = 45)
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int userNumber;
 
     @Column(name = "user_gender",nullable = false)
     private String userGender;
@@ -58,4 +61,14 @@ public class User {
 
     @Column(name = "user_password",nullable = false)
     private String userPassword;
+
+//    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+//    @JoinTable(name = "USER_ROLE",
+//            joinColumns = {
+//                    @JoinColumn(name = "USER_ID")
+//            },
+//            inverseJoinColumns = {
+//                    @JoinColumn(name = "ROLE_ID")
+//            })
+    private String role;
 }

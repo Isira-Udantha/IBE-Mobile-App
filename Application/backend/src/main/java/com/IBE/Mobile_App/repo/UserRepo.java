@@ -9,7 +9,7 @@ import java.util.List;
 
 @Repository
 @EnableJpaRepositories
-public interface UserRepo extends JpaRepository<User,Integer> {
+public interface UserRepo extends JpaRepository<User,String> {
 
     List<User> findByUserEmail(String username);
 }

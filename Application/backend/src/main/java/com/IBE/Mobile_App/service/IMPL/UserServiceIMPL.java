@@ -17,7 +17,7 @@ public class UserServiceIMPL implements UserService {
     @Override
     public String addUser(UserDTO userDTO) {
         User user = modelMapper.map(userDTO, User.class);
-        if (!userRepo.existsById(user.getUserId())){
+        if (!userRepo.existsById(user.getUserName())){
             userRepo.save(user);
             return user.getUserName() + " is saved";
         }else {
@@ -27,9 +27,9 @@ public class UserServiceIMPL implements UserService {
     }
 
     @Override
-    public UserDTO getUserById(int userid) {
-        User user = userRepo.getReferenceById(userid);
-        if (userRepo.existsById(user.getUserId())) {
+    public UserDTO getUserById(String username) {
+        User user = userRepo.getReferenceById(username);
+        if (userRepo.existsById(user.getUserName())) {
             UserDTO userDTO = modelMapper.map(user, UserDTO.class);
             return userDTO;
         }else {

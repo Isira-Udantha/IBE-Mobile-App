@@ -6,5 +6,5 @@ public interface UserService {
 
     String addUser(UserDTO userDTO);
 
-    UserDTO getUserById(int userid);
+    UserDTO getUserById(String username);
 }
