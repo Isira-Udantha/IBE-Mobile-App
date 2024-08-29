@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.time.Duration;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
@@ -28,4 +29,8 @@ public class Flight {
     private LocalDate departureDate;
     @Column(name = "arrival_date", nullable = false,columnDefinition = "DATE")
     private LocalDate arrivalDate;
+    @Column(name = "arrival_time", columnDefinition = "TIME")
+    private LocalTime arrivalTime;
+    @Column(name = "departure_time", columnDefinition = "TIME")
+    private LocalTime departureTime;
 }

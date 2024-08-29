@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.Column;
 import java.time.Duration;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Date;
 
 @AllArgsConstructor
@@ -19,4 +20,6 @@ public class FlightDTO {
     private String arrivalAirport;
     private LocalDate departureDate;
     private LocalDate arrivalDate;
+    private LocalTime arrivalTime;
+    private LocalTime departureTime;
 }

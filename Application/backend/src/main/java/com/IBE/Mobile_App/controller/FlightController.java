@@ -23,7 +23,8 @@ public class FlightController {
     public ResponseEntity<StandardResponse> saveFlight(@RequestBody FlightDTO flightDTO) {
         String id = flightService.addFlight(flightDTO);
         return new ResponseEntity<StandardResponse>(
-                new StandardResponse(201, "flight added succesfully", id),
+//                new StandardResponse(201, "flight added succesfully", id),
+                new StandardResponse(id),
                 HttpStatus.CREATED
         );
     }
@@ -37,7 +38,8 @@ public class FlightController {
     {
         List<FlightDTO> flightDTO = flightService.searchFlights(departure_date,arrival,departure);
         return new ResponseEntity<StandardResponse>(
-                new StandardResponse(200,"Success",flightDTO),
+//                new StandardResponse(200,"Success",flightDTO),
+                new StandardResponse(flightDTO),
                 HttpStatus.OK
         );
 
