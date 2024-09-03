@@ -29,7 +29,7 @@ public class FlightController {
         );
     }
 
-    @GetMapping(value = "/search-flight-by-date-arrival-and-departure",
+    @GetMapping(value = "/search",
             params = {"departure_date", "arrival", "departure"}
     )
     public ResponseEntity<StandardResponse> searchFlights(@RequestParam(value = "departure_date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate departure_date,
@@ -37,11 +37,15 @@ public class FlightController {
                                                          @RequestParam(value = "departure") String departure)
     {
         List<FlightDTO> flightDTO = flightService.searchFlights(departure_date,arrival,departure);
-        return new ResponseEntity<StandardResponse>(
-//                new StandardResponse(200,"Success",flightDTO),
-                new StandardResponse(flightDTO),
-                HttpStatus.OK
-        );
+        if(flightDTO.size()>0){
+            return new ResponseEntity<StandardResponse>(
+    //                new StandardResponse(200,"Success",flightDTO),
+                    new StandardResponse(flightDTO),
+                    HttpStatus.OK);
+        }else {
+            throw new RuntimeException("No flight found");
+        }
+
 
     }
 }

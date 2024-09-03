@@ -2,6 +2,7 @@ package com.IBE.Mobile_App.service.IMPL;
 
 import com.IBE.Mobile_App.dto.FlightDTO;
 import com.IBE.Mobile_App.entity.Flight;
+import com.IBE.Mobile_App.exception.NotFoundException;
 import com.IBE.Mobile_App.repo.FlightRepo;
 import com.IBE.Mobile_App.service.FlightService;
 import org.modelmapper.ModelMapper;
@@ -38,7 +39,7 @@ public class FlightServiceIMPL implements FlightService {
             List<FlightDTO> flightDTOS = modelMapper.map(flights, new TypeToken<List<FlightDTO>>(){}.getType());
             return flightDTOS;
         }else {
-            throw new RuntimeException("No flights are found");
+            throw new NotFoundException("No FLight Found");
         }
     }
 }

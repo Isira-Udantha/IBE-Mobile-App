@@ -37,14 +37,20 @@ public class UserController {
     public ResponseEntity<StandardResponse> registerUser(@RequestBody User user){
         ResponseEntity<StandardResponse> response = null;
         try {
-            String hashPassword = passwordEncoder.encode(user.getUserPassword());
-            user.setUserPassword(hashPassword);
-            User savedUser = userRepo.save(user);
-            if (savedUser.getUserNumber()>0){
+            if (!userRepo.existsById(user.getUserName())){
+                String hashPassword = passwordEncoder.encode(user.getUserPassword());
+                user.setUserPassword(hashPassword);
+                User savedUser = userRepo.save(user);
+                if (savedUser.getUserNumber()>0){
+                    return new ResponseEntity<StandardResponse>(
+    //                new StandardResponse(201,"user added successfully",savedUser.getUserName()),
+                      new StandardResponse(savedUser.getUserName()),
+                    HttpStatus.CREATED);
+                }
+            }else {
                 return new ResponseEntity<StandardResponse>(
-//                new StandardResponse(201,"user added successfully",savedUser.getUserName()),
-                  new StandardResponse(savedUser.getUserName()),
-                HttpStatus.CREATED);
+                        new StandardResponse("User exist"),
+                        HttpStatus.BAD_REQUEST);
             }
         }catch (Exception ex){
                 return new ResponseEntity<StandardResponse>(
