@@ -1,6 +1,5 @@
 package com.IBE.Mobile_App.config;
 
-
 import com.IBE.Mobile_App.service.JwtService;
 import com.IBE.Mobile_App.util.JwtUtil;
 import io.jsonwebtoken.ExpiredJwtException;
@@ -26,17 +25,18 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 
     @Autowired
     private JwtService jwtService;
+
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         final String requestTokenHeader = request.getHeader("Authorization");
 
-        String username = null;
+        String userName = null;
         String jwtToken = null;
 
         if (requestTokenHeader != null && requestTokenHeader.startsWith("Bearer")){
             jwtToken = requestTokenHeader.substring(7);
             try {
-                username = jwtUtil.getUsernameFromToken(jwtToken);
+                userName = jwtUtil.getUsernameFromToken(jwtToken);
             }catch (IllegalArgumentException e){
                 System.out.println("Unable to get jwt token");
             }catch (ExpiredJwtException e){
@@ -47,8 +47,8 @@ public class JwtRequestFilter extends OncePerRequestFilter {
             System.out.println("Jwt token is not start with bearer");
         }
 
-        if (username != null && SecurityContextHolder.getContext().getAuthentication() == null){
-            UserDetails userDetails = jwtService.loadUserByUsername(username);
+        if (userName != null && SecurityContextHolder.getContext().getAuthentication() == null){
+            UserDetails userDetails = jwtService.loadUserByUsername(userName);
 
             if (jwtUtil.validateToken(jwtToken,userDetails)){
                 UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(

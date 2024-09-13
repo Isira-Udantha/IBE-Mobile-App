@@ -3,16 +3,16 @@ package com.IBE.Mobile_App.dto;
 import com.IBE.Mobile_App.entity.User;
 
 
-public class LoginResponse {
+public class LoginResponseDTO {
     private User user;
     private  String jwtToken;
 
-    public LoginResponse(User user, String jwtToken) {
+    public LoginResponseDTO(User user, String jwtToken) {
         this.user = user;
         this.jwtToken = jwtToken;
     }
 
-    public LoginResponse() {
+    public LoginResponseDTO() {
     }
 
     public User getUser() {

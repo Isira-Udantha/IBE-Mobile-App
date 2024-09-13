@@ -15,11 +15,18 @@ import java.util.Date;
 @Data
 public class FlightDTO {
     private int flightId;
+
     private String flightDesignator;
+
     private String departureAirport;
+
     private String arrivalAirport;
+
     private LocalDate departureDate;
+
     private LocalDate arrivalDate;
+
     private LocalTime arrivalTime;
+
     private LocalTime departureTime;
 }

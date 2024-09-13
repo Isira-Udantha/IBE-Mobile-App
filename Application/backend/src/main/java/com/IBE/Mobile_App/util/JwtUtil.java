@@ -1,8 +1,11 @@
 package com.IBE.Mobile_App.util;
 
+import com.IBE.Mobile_App.controller.FlightController;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
@@ -13,7 +16,10 @@ import java.util.function.Function;
 
 @Component
 public class JwtUtil {
+
+    private static final Logger logger = LoggerFactory.getLogger(JwtUtil.class);
     private static final String SECRET_KEY = "u6Y93jHq8GtBz7ShRqVJwQ2KhguhuuihyfrtddserfyugugtdezrtyiopokopjkiuhuygtvujoiknuyvtfctrmLrFpMtNa3Ps9Qh5TvWx8Yz5EcLs7DqFbHdRqXs9QwErTxYuPlKoBmNz";
+
     private static final int TOKEN_VALIDITY = 3600 * 5;
 
     public String getUsernameFromToken(String token) {
@@ -40,9 +46,10 @@ public class JwtUtil {
     }
 
     public String generateToken(UserDetails userDetails) {
+        logger.info("START: generateToken {}",userDetails);
         Map<String, Object> claims = new HashMap<>();
-        System.out.println(userDetails);
-
+//        System.out.println(userDetails);
+        logger.info("END: generateToken");
         return Jwts.builder()
                 .setClaims(claims)
                 .setSubject(userDetails.getUsername())

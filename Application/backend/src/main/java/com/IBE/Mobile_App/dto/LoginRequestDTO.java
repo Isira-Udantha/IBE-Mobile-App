@@ -1,6 +1,6 @@
 package com.IBE.Mobile_App.dto;
 
-public class LoginRequest {
+public class LoginRequestDTO {
     private String userName;
     private String userPassword;
 
@@ -20,11 +20,11 @@ public class LoginRequest {
         this.userPassword = userPassword;
     }
 
-    public LoginRequest(String userName, String userPassword) {
+    public LoginRequestDTO(String userName, String userPassword) {
         this.userName = userName;
         this.userPassword = userPassword;
     }
 
-    public LoginRequest() {
+    public LoginRequestDTO() {
     }
 }

@@ -19,8 +19,10 @@ public class Flight {
     @Column(name = "flight_id")
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int flightId;
+
     @Column(name = "flight_designator",nullable = false)
     private String flightDesignator;
+
     @Column(name = "departure",nullable = false)
     private String departureAirport;
     @Column(name = "arrival", nullable = false)
